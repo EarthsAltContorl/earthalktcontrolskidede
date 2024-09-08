@@ -1,0 +1,27 @@
+getgenv().HasRunnedStopCMD = true
+
+getgenv().StopCMD = function(args)
+    local closestPlayer = args[2] and getgenv().MUF_ReturnClosestPlayer(args[2])
+
+    -- If a specific player is provided and matches the local player
+    if closestPlayer and closestPlayer == game.Players.LocalPlayer then
+        getgenv().CA_DroppingUntil = false
+        getgenv().CA_DropUntilDroppedAmount = 0
+        getgenv().CA_DropUntilAmount = 0
+        getgenv().CA_Dropping = false
+
+        getgenv().MUF_sendChatMessage('Stopped All Dropping Types!')
+    
+    elseif closestPlayer then
+        getgenv().MUF_sendChatMessage('Unknown alt specified.')
+    
+    else
+        -- If no specific player is provided, stop dropping for the local player
+        getgenv().CA_DroppingUntil = false
+        getgenv().CA_DropUntilDroppedAmount = 0
+        getgenv().CA_DropUntilAmount = 0
+        getgenv().CA_Dropping = false
+
+        getgenv().MUF_sendChatMessage('Stopped All Dropping Types!')
+    end
+end
